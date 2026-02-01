@@ -32,7 +32,7 @@ class MyPromise {
       this.PromiseResult = result
 
       this.onFulfilledCallbacks.forEach((callback) => {
-        callback(result)
+        callback()
       })
     }
   }
@@ -44,7 +44,7 @@ class MyPromise {
       this.PromiseResult = reason
 
       this.onRejectedCallbacks.forEach((callback) => {
-        callback(reason)
+        callback()
       })
     }
   }
@@ -149,7 +149,7 @@ function resolvePromise(promise2, x, resolve, reject) {
       then = x.then
     } catch (error) {
       //  如果取 x.then 的值时抛出错误 e ，则以 e 为据因拒绝 promise
-      return reject(error)
+      reject(error)
     }
 
     /**
@@ -184,7 +184,7 @@ function resolvePromise(promise2, x, resolve, reject) {
     }
   } else {
     // 如果 x 不为对象或者函数，以 x 为参数执行 promise
-    return resolve(x)
+    resolve(x)
   }
 }
 
